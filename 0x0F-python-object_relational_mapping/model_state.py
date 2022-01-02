@@ -1,15 +1,20 @@
 #!/usr/bin/python3
-'''task 6 db tables classes'''
 
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String
+"""
+    First state model
+"""
+
+from sqlalchemy import String, Column, Integer
+from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
 
 
 class State(Base):
-    '''state class for the state table'''
+    """
+        class which is a blueprint for State instances
+        that links to  the MySQL table 'states'
+    """
     __tablename__ = "states"
-    id = Column(Integer, primary_key=True, nullable=False,
-                autoincrement=True, unique=True)
-    name = Column(String(128), nullable=False)
+    id = Column('id', Integer(), primary_key=True)
+    name = Column('name', String(128), nullable=False)

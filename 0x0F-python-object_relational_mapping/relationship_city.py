@@ -1,17 +1,16 @@
 #!/usr/bin/python3
-'''task 15 model script'''
 
-from sqlalchemy.orm import relationship
+"""
+    Another state model
+"""
+
 from relationship_state import Base
-from sqlalchemy import Column, String, Integer, ForeignKey
-from sqlalchemy.orm import relationship
+from sqlalchemy import Integer, String, Column, ForeignKey
 
 
 class City(Base):
-    '''City model for my db'''
-    __tablename__ = 'cities'
-    id = Column(Integer, unique=True, nullable=False,
-                autoincrement=True, primary_key=True)
-    name = Column(String(128), nullable=False)
-    state_id = Column(Integer, ForeignKey('states.id'), nullable=False)
-    state = relationship('State', back_populates='cities')
+    """ class representing instance of Cities """
+    __tablename__ = "cities"
+    id = Column('id', Integer(), primary_key=True)
+    name = Column('name', String(128), nullable=False)
+    state_id = Column(Integer(), ForeignKey('states.id'), nullable=False)

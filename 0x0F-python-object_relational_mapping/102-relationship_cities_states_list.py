@@ -1,29 +1,26 @@
 #!/usr/bin/python3
-'''script for task 17'''
+
+"""
+    A script that lists all City objects from the database hbtn_0e_101_usa
+    Takes 3 arguments: mysql username, mysql password and database name
+    You must use only one query to the database
+    You must use the state relationship to access to the State object
+    linked to the City object
+"""
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from relationship_state import State, Base
+from sqlalchemy.orm import Session
+from relationship_state import Base, State
 from relationship_city import City
-import sys
+from sys import argv
 
-if __name__ == '__main__':
-    username = sys.argv[1]
-    password = sys.argv[2]
-    db_name = sys.argv[3]
-    host = 'localhost'
-    port = '3306'
 
-    engine = create_engine('mysql+mysqldb://{}:{}@{}:{}/{}'.format(
-                            username, password, host, port, db_name
-                            ), pool_pre_ping=True)
-    Base.metadata.create_all(engine)
-    Session = sessionmaker(bind=engine)
-    loc_session = Session()
-    cities = loc_session.query(City).order_by(City.id.asc()).all()
+if __name__ == "__main__":
+    engine = create_engine("mysql+mysqldb://{}:{}@localhost/{}".format(
+                            argv[1], argv[2], argv[3]))
+    session = Session(bind=engine)
+
+    cities = session.query(City).all()
 
     for city in cities:
-        print('{}: {} -> {}'.format(city.id, city.name, city.state.name))
-
-    loc_session.close()
-    engine.dispose()
+        print("{}: {} -> {}".format(city.id, city.name, city.state.name))
