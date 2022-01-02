@@ -1,4 +1,8 @@
 #!/usr/bin/node
-const firstArg = process.argv[2];
-const secondArg = process.argv[3];
-console.log(firstArg + ' is ' + secondArg);
+// Prints first argument passed to a script
+const myVar = process.argv[2];
+if (myVar === undefined) {
+  console.log('No argument');
+} else {
+  console.log(myVar);
+}

@@ -1,11 +1,17 @@
 #!/usr/bin/node
-const num = parseInt(process.argv[2]);
-
-function factorial (n) {
-  if (!n) {
-    return (1);
+// Computes and prints a factorial
+function factorial (factor) {
+  if (factor === 0) {
+    return 0;
+  } else if (factor === 1) {
+    return 1;
+  } else {
+    return (factor * factorial(factor -1));
   }
-  return (n * factorial(n - 1));
 }
-
-console.log(factorial(num));
+const myVar = parseInt(process.argv[2]);
+if (isNaN(myVar) || myVar === undefined) {
+  console.log('1');
+} else {
+  console.log(factorial(myVar));
+}
